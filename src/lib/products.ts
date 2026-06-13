@@ -23,9 +23,9 @@ function mapSupabaseProduct(row: SupabaseProductRow): Product {
 export async function getCategories(): Promise<Category[]> {
   const { data, error } = await supabase
     .from("categories")
-    .select("id,name,slug,description,image_url,is_active")
+    .select("id,name,slug,description,image_url,sort_order,is_active")
     .eq("is_active", true)
-    .order("name", { ascending: true });
+    .order("sort_order", { ascending: true }).order("name", { ascending: true });
 
   if (error) {
     console.error("Failed to load categories", error.message);
