@@ -19,6 +19,7 @@ export const placeholderCategories: Category[] = categoryNames.map((name, index)
   slug: name.toLowerCase().replaceAll(" ", "-"),
   description: "Curated parts for student robotics and electronics builds.",
   image_url: null,
+  sort_order: index + 1,
   is_active: true
 }));
 

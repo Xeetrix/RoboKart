@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { CartProvider } from "@/context/CartContext";
-import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { AppShell } from "@/components/AppShell";
 import "./globals.css";
 
 
@@ -17,12 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="min-h-screen bg-white font-sans antialiased">
-        <CartProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <WhatsAppButton />
-        </CartProvider>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
