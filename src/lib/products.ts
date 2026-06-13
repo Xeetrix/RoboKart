@@ -2,6 +2,24 @@ import { supabase } from "@/lib/supabase";
 import { placeholderCategories, placeholderProducts } from "@/lib/placeholders";
 import type { Category, Product } from "@/types/database";
 
+type ProductCategory = Pick<Category, "id" | "name" | "slug">;
+
+type SupabaseProductRow = Omit<Product, "categories" | "created_at"> & {
+  categories?: ProductCategory | ProductCategory[] | null;
+  created_at?: string;
+};
+
+function mapSupabaseProduct(row: SupabaseProductRow): Product {
+  const category = Array.isArray(row.categories)
+    ? row.categories[0] ?? null
+    : row.categories ?? null;
+
+  return {
+    ...row,
+    categories: category,
+  };
+}
+
 export async function getCategories(): Promise<Category[]> {
   const { data, error } = await supabase
     .from("categories")
@@ -29,5 +47,5 @@ export async function getProducts(): Promise<Product[]> {
     return placeholderProducts;
   }
 
-  return data?.length ? (data as Product[]) : placeholderProducts;
+  return data?.length ? data.map(mapSupabaseProduct) : placeholderProducts;
 }
