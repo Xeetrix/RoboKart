@@ -13,7 +13,7 @@ export function Hero() {
             <h1 className="text-5xl font-black tracking-tight text-ink sm:text-6xl lg:text-7xl">Robokart</h1>
             <p className="max-w-2xl text-xl font-semibold text-zinc-700 sm:text-2xl">Powering every bot with precision.</p>
             <p className="max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg">
-              Shop microcontrollers, sensors, motor drivers, robot kits, and project packages built for Bangladesh's student robotics community.
+              Shop microcontrollers, sensors, motor drivers, robot kits, and project packages built for Bangladesh&apos;s student robotics community.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
