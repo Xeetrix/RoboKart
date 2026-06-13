@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useMemo, useState, type FormEvent } from "react";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
+import { isSupabaseAdmin } from "@/lib/supabase/adminAuth";
 
 export function AdminLoginForm() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export function AdminLoginForm() {
       return;
     }
 
-    if (data.user.app_metadata?.role !== "admin") {
+    if (!isSupabaseAdmin(data.user)) {
       await supabase.auth.signOut();
       setError("This account is not marked as a Robokart admin.");
       setIsLoading(false);
@@ -48,7 +49,7 @@ export function AdminLoginForm() {
       <form onSubmit={handleSubmit} className="relative w-full max-w-md rounded-[2rem] border border-white/10 bg-white p-6 text-slate-950 shadow-2xl shadow-sky-950/40 sm:p-8">
         <p className="text-sm font-black uppercase tracking-[0.25em] text-sky-600">Admin Login</p>
         <h1 className="mt-3 text-3xl font-black">Welcome back</h1>
-        <p className="mt-2 text-sm leading-6 text-slate-500">Sign in with a Supabase Auth user that is allowed by your admin RLS policies.</p>
+        <p className="mt-2 text-sm leading-6 text-slate-500">Sign in with your Supabase Auth email and password. No default admin credentials are stored in the app.</p>
 
         <div className="mt-8 grid gap-5">
           <label className="grid gap-2 text-sm font-black text-slate-700">
@@ -59,7 +60,7 @@ export function AdminLoginForm() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               className="field-control font-normal"
-              placeholder="admin@example.com"
+              placeholder="you@example.com"
               autoComplete="email"
             />
           </label>

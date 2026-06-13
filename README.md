@@ -27,6 +27,16 @@ NEXT_PUBLIC_PHONE_NUMBER=+880 1000-000000
 
 Run `supabase/schema.sql` in the Supabase SQL editor. It creates `categories`, `products`, `orders`, and `order_items` with RLS policies that allow public reads for active categories/products and public inserts for orders/order items only.
 
+### Admin authentication
+
+Admin login uses Supabase Auth email/password accounts. The app does not include, seed, or hardcode any admin email or password. Create admin users in Supabase Auth, then mark only those users with admin app metadata so the RLS policies and admin UI can authorize them:
+
+```json
+{ "role": "admin" }
+```
+
+Set that metadata from the Supabase dashboard or a secure server-side/admin script that uses the service role key. Never expose the service role key or admin passwords in client code, committed files, or `NEXT_PUBLIC_*` environment variables.
+
 ## Development
 
 ```bash

@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
+import { isSupabaseAdmin } from "@/lib/supabase/adminAuth";
 
 const navItems = [
   { href: "/admin", label: "Dashboard" },
@@ -36,7 +37,7 @@ export function AdminAuthGuard({ children }: { children: ReactNode }) {
         return;
       }
 
-      if (data.session.user.app_metadata?.role !== "admin") {
+      if (!isSupabaseAdmin(data.session.user)) {
         await supabase.auth.signOut();
         router.replace("/admin/login");
         return;
@@ -53,7 +54,7 @@ export function AdminAuthGuard({ children }: { children: ReactNode }) {
         router.replace("/admin/login");
         return;
       }
-      if (session.user.app_metadata?.role !== "admin") {
+      if (!isSupabaseAdmin(session.user)) {
         void supabase.auth.signOut();
         router.replace("/admin/login");
         return;
