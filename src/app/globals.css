@@ -11,13 +11,37 @@ html {
 }
 
 body {
-  background: #ffffff;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 30rem),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 44%, #ffffff 100%);
   color: #09090b;
 }
 
 ::selection {
   background: #bae6fd;
   color: #0f172a;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -16px, 0) rotate(3deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(0, 14px, 0) rotate(-4deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.06); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @layer components {
@@ -30,10 +54,38 @@ body {
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-deepBlue focus:outline-none focus:ring-2 focus:ring-skyAccent focus:ring-offset-2;
+    @apply inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ink via-deepBlue to-sky-700 px-6 py-3 text-sm font-black text-white shadow-lg shadow-sky-950/15 transition duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-xl hover:shadow-sky-500/25 focus:outline-none focus:ring-2 focus:ring-skyAccent focus:ring-offset-2 disabled:cursor-not-allowed disabled:from-zinc-300 disabled:via-zinc-300 disabled:to-zinc-300 disabled:text-zinc-500;
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-zinc-200 bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:border-skyAccent hover:text-deepBlue focus:outline-none focus:ring-2 focus:ring-skyAccent focus:ring-offset-2;
+    @apply inline-flex items-center justify-center rounded-full border border-sky-200/80 bg-white/85 px-6 py-3 text-sm font-black text-ink shadow-sm shadow-sky-950/5 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:border-skyAccent hover:text-deepBlue hover:shadow-lg hover:shadow-sky-500/15 focus:outline-none focus:ring-2 focus:ring-skyAccent focus:ring-offset-2;
+  }
+
+  .glass-card {
+    @apply border border-white/60 bg-white/80 shadow-soft backdrop-blur-xl;
+  }
+
+  .premium-card {
+    @apply rounded-3xl border border-zinc-200/70 bg-white shadow-sm shadow-slate-950/5 transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-soft;
+  }
+
+  .field-control {
+    @apply w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-ink outline-none transition focus:border-skyAccent focus:ring-4 focus:ring-sky-100;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.7s ease both;
+  }
+
+  .animate-float-slow {
+    animation: float-slow 7s ease-in-out infinite;
+  }
+
+  .animate-float-reverse {
+    animation: float-reverse 8s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
   }
 }

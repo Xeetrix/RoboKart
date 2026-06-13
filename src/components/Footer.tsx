@@ -6,10 +6,10 @@ export function Footer() {
   const facebookUrl = process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "#";
 
   return (
-    <footer className="border-t border-zinc-100 bg-zinc-950 text-white">
+    <footer className="border-t border-white/10 bg-zinc-950 text-white">
       <div className="mx-auto grid max-w-7xl gap-10 container-padding py-12 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="space-y-4">
-          <RKLogo />
+          <RKLogo tone="dark" />
           <p className="max-w-md text-sm leading-6 text-zinc-300">
             Bangladesh-based robotics and electronics components with manual project mentoring for students, makers, and early builders.
           </p>
@@ -17,17 +17,17 @@ export function Footer() {
         <div>
           <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-sky-300">Shop</h3>
           <div className="mt-4 flex flex-col gap-3 text-sm text-zinc-300">
-            <Link href="/products">Products</Link>
-            <Link href="/cart">Cart</Link>
-            <Link href="/checkout">Checkout</Link>
+            <Link href="/products" className="transition hover:text-sky-200">Products</Link>
+            <Link href="/cart" className="transition hover:text-sky-200">Cart</Link>
+            <Link href="/checkout" className="transition hover:text-sky-200">Checkout</Link>
           </div>
         </div>
         <div>
           <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-sky-300">Contact</h3>
           <div className="mt-4 flex flex-col gap-3 text-sm text-zinc-300">
             <span>{phone}</span>
-            <a href={facebookUrl}>Facebook page</a>
-            <Link href="/contact">Need mentoring?</Link>
+            <a href={facebookUrl} className="transition hover:text-sky-200">Facebook page</a>
+            <Link href="/contact" className="transition hover:text-sky-200">Need mentoring?</Link>
           </div>
         </div>
       </div>
